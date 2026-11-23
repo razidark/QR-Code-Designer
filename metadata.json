@@ -1,0 +1,6 @@
+{
+  "name": "Designer QR Code Generator",
+  "description": "A highly polished, premium QR code studio. Create custom-branded QR codes with logos, unique color gradients, custom patterns, eye shapes, and transparent backgrounds.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,80 @@
+{
+  "name": "rzl-qr-studio",
+  "private": true,
+  "version": "1.0.7",
+  "description": "Premium custom-branded vector QR generator with real-time AI styling (RZL Apps)",
+  "author": "RZL Apps",
+  "type": "module",
+  "main": "electron/main.cjs",
+  "scripts": {
+    "dev": "tsx server.ts",
+    "build": "vite build && esbuild server.ts --bundle --platform=node --format=cjs --packages=external --sourcemap --outfile=dist/server.cjs",
+    "start": "node dist/server.cjs",
+    "preview": "vite preview",
+    "clean": "node -e \"const fs=require('fs');['dist','dist-desktop'].forEach(d=>fs.rmSync(d,{recursive:true,force:true}))\"",
+    "lint": "tsc --noEmit",
+    "test": "vitest run",
+    "electron:start": "electron electron/main.cjs",
+    "electron:pack": "pnpm version patch --no-git-tag-version && pnpm run build && electron-builder build --dir",
+    "electron:dist": "pnpm version patch --no-git-tag-version && pnpm run build && electron-builder build"
+  },
+  "build": {
+    "appId": "com.pixelcraft.qrstudio",
+    "productName": "PixelCraft QR Studio",
+    "asar": true,
+    "asarUnpack": [
+      "dist/**/*"
+    ],
+    "directories": {
+      "output": "dist-desktop"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ]
+    },
+    "mac": {
+      "target": [
+        "dmg"
+      ]
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    }
+  },
+  "dependencies": {
+    "@google/genai": "^2.4.0",
+    "@tailwindcss/vite": "^4.1.14",
+    "dotenv": "^17.2.3",
+    "express": "^4.21.2",
+    "jsqr": "^1.4.0",
+    "lucide-react": "^0.546.0",
+    "qrcode": "^1.5.4",
+    "react": "^19.0.1",
+    "react-dom": "^19.0.1"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^22.14.0",
+    "@types/qrcode": "^1.5.6",
+    "@vitejs/plugin-react": "^5.0.4",
+    "autoprefixer": "^10.4.21",
+    "electron": "^42.2.0",
+    "electron-builder": "^26.15.3",
+    "esbuild": "^0.25.0",
+    "tailwindcss": "^4.1.14",
+    "tsx": "^4.21.0",
+    "typescript": "~5.8.2",
+    "vite": "^6.2.3",
+    "vitest": "^5.1.0"
+  }
+}
